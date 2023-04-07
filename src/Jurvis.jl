@@ -25,7 +25,7 @@ export spectrumall, easyspectrum;
 export decomposeSSA, embedd, calcmode, calcmodes, groupmodes;
 
 # function for Hilbert analysis
-export fullsignal, envelope, unwrap, unwrap!, instphase, instdecaycoeff, instdamping;
+export fullsignal, envelope, unwrap, unwrap!, instphase, instdamping;
 
 export findiff;
 

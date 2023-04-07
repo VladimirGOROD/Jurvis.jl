@@ -44,13 +44,15 @@ function instphase(vec::AbstractVector{Complex})
 end
 
 
-function instdecaycoeff(env::AbstractVector{<:Real})
-    env_deriv = findiff(env, 1; order = 4);
-    return (- env_deriv ./ env)
-end
 
-function instdamping(env::AbstractVector{<:Real}, instfreq::AbstractVector{<:Real})
-    return 2*π*instdecaycoeff(env) ./ instfreq;
+function instdamping(ω, A, dt)
+    Ȧ=diff14(A,dt);
+    dω=diff14(ω,dt);
+    β = similar(ω);
+    for i in eachindex(ω);
+        β[i]=-Ȧ[i]/A[i]-(dω[i])/(2*ω[i]);
+    end
+    return β
 end
 
 function instfrequency(data::MeasuredData, channel)
